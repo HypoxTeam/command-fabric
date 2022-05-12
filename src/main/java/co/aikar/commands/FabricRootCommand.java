@@ -34,6 +34,11 @@ public class FabricRootCommand extends LiteralArgumentBuilder<ServerCommandSourc
 	}
 
 	@Override
+	public void addChildShared(List<BaseCommand> children, SetMultimap<String, RegisteredCommand> subCommands, BaseCommand command) {
+		RootCommand.super.addChildShared(children, subCommands, command);
+	}
+
+	@Override
 	public CommandManager getManager() {
 		return manager;
 	}
