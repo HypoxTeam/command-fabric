@@ -2,13 +2,14 @@ package co.aikar.commands;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.server.command.ServerCommandSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FabricRootCommand extends LiteralArgumentBuilder<ServerCommandSource> implements RootCommand {
+public class FabricRootCommand implements RootCommand, Command<ServerCommandSource> {
 
 	private final FabricCommandManager manager;
 
@@ -19,8 +20,6 @@ public class FabricRootCommand extends LiteralArgumentBuilder<ServerCommandSourc
 	boolean isRegistered = false;
 
 	public FabricRootCommand(FabricCommandManager manager, String name) {
-		super(name);
-
 		this.manager = manager;
 		this.name = name;
 	}
@@ -31,11 +30,6 @@ public class FabricRootCommand extends LiteralArgumentBuilder<ServerCommandSourc
 			this.defCommand = command;
 		}
 		addChildShared(this.children, this.subCommands, command);
-	}
-
-	@Override
-	public void addChildShared(List<BaseCommand> children, SetMultimap<String, RegisteredCommand> subCommands, BaseCommand command) {
-		RootCommand.super.addChildShared(children, subCommands, command);
 	}
 
 	@Override
@@ -56,5 +50,16 @@ public class FabricRootCommand extends LiteralArgumentBuilder<ServerCommandSourc
 	@Override
 	public String getCommandName() {
 		return name;
+	}
+
+	@Override
+	public int run(CommandContext<ServerCommandSource> ctx) {
+		execute(
+				manager.getCommandIssuer(ctx.getSource()),
+				ctx.getInput(),
+				BrigadierArgumentAccessor.parseArguments(ctx)
+		);
+
+		return 1;
 	}
 }
