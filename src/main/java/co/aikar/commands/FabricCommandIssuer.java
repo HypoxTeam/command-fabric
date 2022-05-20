@@ -1,9 +1,9 @@
 package co.aikar.commands;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.MessageType;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.StandardCharsets;
@@ -31,7 +31,7 @@ public class FabricCommandIssuer implements CommandIssuer {
 
 	@Override
 	public boolean isPlayer() {
-		return source.getEntity() instanceof PlayerEntity;
+		return source.getEntity() instanceof ServerPlayerEntity;
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package co.aikar.commands;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class FabricCommandCompletionContext extends CommandCompletionContext<FabricCommandIssuer> {
 	public FabricCommandCompletionContext(RegisteredCommand command, FabricCommandIssuer issuer, String input, String config, String[] args) {
@@ -13,7 +13,7 @@ public class FabricCommandCompletionContext extends CommandCompletionContext<Fab
 		return this.issuer.getIssuer();
 	}
 
-	public PlayerEntity player() throws CommandSyntaxException {
+	public ServerPlayerEntity player() throws CommandSyntaxException {
 		return source().getPlayer();
 	}
 }

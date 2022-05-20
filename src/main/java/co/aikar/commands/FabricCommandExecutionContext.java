@@ -1,8 +1,8 @@
 package co.aikar.commands;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class FabricCommandExecutionContext extends CommandExecutionContext<Fabri
 		return issuer.getIssuer();
 	}
 
-	public PlayerEntity player() throws CommandSyntaxException {
+	public ServerPlayerEntity player() throws CommandSyntaxException {
 		return issuer.getIssuer().getPlayer();
 	}
 
