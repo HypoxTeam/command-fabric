@@ -30,6 +30,7 @@ public class BrigadierArgumentAccessor {
 				.toArray(String[]::new);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <S> Map<String, ParsedArgument<S, ?>> accessFrom(CommandContext<S> ctx) {
 		try {
 			return (Map<String, ParsedArgument<S, ?>>) PARSED_ARGUMENTS.get(ctx);

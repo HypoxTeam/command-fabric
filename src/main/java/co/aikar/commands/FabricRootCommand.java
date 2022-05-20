@@ -59,7 +59,6 @@ public class FabricRootCommand implements RootCommand, Command<ServerCommandSour
 				ctx.getInput(),
 				BrigadierArgumentAccessor.parseArguments(ctx)
 		);
-
 		return 1;
 	}
 }

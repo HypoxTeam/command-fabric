@@ -56,15 +56,17 @@ public class FabricCommandManager extends CommandManager<
 	public void registerCommand(BaseCommand command) {
 		command.onRegister(this);
 
+		dispatcher.register(
+				CommandAdapter.from(command)
+		);
+
 		for (Entry<String, RootCommand> entry : command.registeredCommands.entrySet()) {
 			FabricRootCommand fabricCommand = (FabricRootCommand) entry.getValue();
 
 			if (!fabricCommand.isRegistered) {
-				dispatcher.register(fabricCommand);
+				fabricCommand.isRegistered = true;
+				registeredCommands.put(entry.getKey(), fabricCommand);
 			}
-
-			fabricCommand.isRegistered = true;
-			registeredCommands.put(entry.getKey(), fabricCommand);
 		}
 	}
 
