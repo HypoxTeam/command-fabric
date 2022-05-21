@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.util.Formatting;
 
 @CommandAlias("test")
 public class TestFabricCommand extends BaseCommand {
@@ -23,7 +24,7 @@ public class TestFabricCommand extends BaseCommand {
 	}
 
 	@Subcommand("colorize")
-	public void colorizeThis(ServerCommandSource sender, ArgTest arg) {
+	public void colorizeThis(ServerCommandSource sender, Formatting arg) {
 		System.out.println(arg + " HOLA " + sender.getName());
 	}
 
