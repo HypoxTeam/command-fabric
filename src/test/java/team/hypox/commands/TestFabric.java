@@ -20,6 +20,9 @@ public class TestFabric implements LoggerProvider {
 
 		MockitoCommandSource source = new MockitoCommandSource(invoke());
 		dispatcher.execute("test fabric", source);
+		dispatcher.execute("test help", source);
+		dispatcher.execute("test asdd", source);
+		dispatcher.execute("test one two", source);
 
 		Assertions.assertSame("HOLAAAA", source.getLastMessageReceived());
 	}

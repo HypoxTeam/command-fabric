@@ -16,7 +16,7 @@ public class CommandAdapter {
 			FabricRootCommand subCommand = (FabricRootCommand) entry.getValue();
 
 			builder.then(
-					RequiredArgumentBuilder.<ServerCommandSource, String>argument("subcommand", StringArgumentType.word())
+					RequiredArgumentBuilder.<ServerCommandSource, String>argument("subcommand", StringArgumentType.greedyString())
 					.executes(subCommand)
 			);
 		}
