@@ -11,6 +11,11 @@ import net.minecraft.server.command.ServerCommandSource;
 @CommandAlias("test")
 public class TestFabricCommand extends BaseCommand {
 
+	@Subcommand("fabric")
+	public void testSubCommand(ServerCommandSource sender) {
+		sender.sendFeedback(Texts.from("HOLAAAA"), false);
+	}
+
 	@Default
 	@HelpCommand
 	public void help() {
@@ -25,11 +30,6 @@ public class TestFabricCommand extends BaseCommand {
 	@Subcommand("one two")
 	public void testSubCommandDouble(ServerCommandSource sender) {
 		System.out.println("two subcommands");
-	}
-
-	@Subcommand("fabric")
-	public void testSubCommand(ServerCommandSource sender) {
-		sender.sendFeedback(Texts.from("HOLAAAA"), false);
 	}
 
 }

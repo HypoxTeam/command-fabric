@@ -26,6 +26,7 @@ public class TestFabric implements LoggerProvider {
 		dispatcher.execute("test asdd", source);
 		dispatcher.execute("test one two", source);
 		dispatcher.execute("test colorize XD", source);
+		dispatcher.execute("test", source);
 
 		Assertions.assertSame("HOLAAAA", source.getLastMessageReceived());
 	}

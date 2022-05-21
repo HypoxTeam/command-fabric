@@ -62,20 +62,10 @@ public class FabricRootCommand implements RootCommand, Command<ServerCommandSour
 		runFabricCommand(
 				manager.getCommandIssuer(ctx.getSource()),
 				ctx.getInput(),
-				ctx.getArgument("subcommand", String.class).split(" ")
+				getArgsOrEmpty(ctx)
 		);
 
 		return 1;
-	}
-
-	private void runFabricCommand(FabricCommandIssuer issuer, String commandLabel, String[] args) {
-		if (commandLabel.contains(":")) commandLabel = ACFPatterns.COLON.split(commandLabel, 2)[1];
-
-		execute(
-				issuer,
-				commandLabel,
-				args
-		);
 	}
 
 	@Override
@@ -97,5 +87,23 @@ public class FabricRootCommand implements RootCommand, Command<ServerCommandSour
 						)
 				)
 		);
+	}
+
+	private void runFabricCommand(FabricCommandIssuer issuer, String commandLabel, String[] args) {
+		if (commandLabel.contains(":")) commandLabel = ACFPatterns.COLON.split(commandLabel, 2)[1];
+
+		execute(
+				issuer,
+				commandLabel,
+				args
+		);
+	}
+
+	private String[] getArgsOrEmpty(CommandContext<ServerCommandSource> ctx) {
+		try {
+			return ctx.getArgument("subcommand", String.class).split(" ");
+		} catch (IllegalArgumentException noArgsException) {
+			return new String[0];
+		}
 	}
 }

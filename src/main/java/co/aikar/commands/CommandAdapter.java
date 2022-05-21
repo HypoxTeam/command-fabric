@@ -20,6 +20,7 @@ public class CommandAdapter {
 		for (Map.Entry<String, RootCommand> entry : command.registeredCommands.entrySet()) {
 			FabricRootCommand subCommand = (FabricRootCommand) entry.getValue();
 
+			builder.executes(subCommand);
 			builder.then(
 					RequiredArgumentBuilder.<ServerCommandSource, String>argument("subcommand", StringArgumentType.greedyString())
 					.executes(subCommand)
