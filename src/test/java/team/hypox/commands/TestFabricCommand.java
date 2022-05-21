@@ -17,6 +17,11 @@ public class TestFabricCommand extends BaseCommand {
 		System.out.println("Help!");
 	}
 
+	@Subcommand("colorize")
+	public void colorizeThis(ServerCommandSource sender, ArgTest arg) {
+		System.out.println(arg + " HOLA " + sender.getName());
+	}
+
 	@Subcommand("one two")
 	public void testSubCommandDouble(ServerCommandSource sender) {
 		System.out.println("two subcommands");

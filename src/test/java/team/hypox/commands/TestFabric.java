@@ -16,6 +16,8 @@ public class TestFabric implements LoggerProvider {
 	public void onTest() throws CommandSyntaxException {
 		CommandDispatcher<ServerCommandSource> dispatcher = new CommandDispatcher<>();
 		FabricCommandManager commandManager = new FabricCommandManager(dispatcher, this);
+		commandManager.getCommandContexts()
+				.registerContext(ArgTest.class, ctx -> ArgTest.valueOf(ctx.popFirstArg().toUpperCase()));
 		commandManager.registerCommand(new TestFabricCommand());
 
 		MockitoCommandSource source = new MockitoCommandSource(invoke());
@@ -23,6 +25,7 @@ public class TestFabric implements LoggerProvider {
 		dispatcher.execute("test help", source);
 		dispatcher.execute("test asdd", source);
 		dispatcher.execute("test one two", source);
+		dispatcher.execute("test colorize XD", source);
 
 		Assertions.assertSame("HOLAAAA", source.getLastMessageReceived());
 	}
