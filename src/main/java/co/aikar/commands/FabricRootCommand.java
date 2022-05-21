@@ -61,4 +61,9 @@ public class FabricRootCommand implements RootCommand, Command<ServerCommandSour
 		);
 		return 1;
 	}
+
+	@Override
+	public BaseCommand getDefCommand() {
+		return defCommand;
+	}
 }
